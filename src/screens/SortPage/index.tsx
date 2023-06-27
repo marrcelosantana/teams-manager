@@ -1,9 +1,9 @@
 import { Container, Title } from "./styles";
 
-export function Login() {
+export function SortPage() {
   return (
     <Container>
-      <Title>Login</Title>
+      <Title>Sort Page</Title>
     </Container>
   );
 }

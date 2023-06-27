@@ -1,9 +1,9 @@
 import { Container, Title } from "./styles";
 
-export function Login() {
+export function Profile() {
   return (
     <Container>
-      <Title>Login</Title>
+      <Title>Profile</Title>
     </Container>
   );
 }

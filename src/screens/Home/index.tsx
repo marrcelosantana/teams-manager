@@ -1,14 +1,11 @@
 import { FlatList } from "react-native";
 import { useTheme } from "styled-components";
 
-import { useNavigation } from "@react-navigation/native";
-import { AppNavigatorRoutesProps } from "@routes/app.routes";
-
 import { UserInfo } from "@components/UserInfo";
 import { Input } from "@components/Input";
 import { PlayerCard } from "@components/PlayerCard";
 
-import { Plus, Power } from "phosphor-react-native";
+import { Plus, MoonStars } from "phosphor-react-native";
 
 import {
   AddButton,
@@ -34,15 +31,14 @@ export function Home() {
     { id: "8", name: "Junior" },
   ];
 
-  const navigator = useNavigation<AppNavigatorRoutesProps>();
   const theme = useTheme();
 
   return (
     <Container>
       <Header>
         <UserInfo />
-        <Button onPress={() => navigator.navigate("login")}>
-          <Power size={32} color={theme.COLORS.ORANGE} weight="bold" />
+        <Button onPress={() => {}}>
+          <MoonStars size={32} color={theme.COLORS.ORANGE} weight="bold" />
         </Button>
       </Header>
 
