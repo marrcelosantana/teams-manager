@@ -1,5 +1,5 @@
 import { useTheme } from "styled-components";
-import { Trash } from "phosphor-react-native";
+import { SoccerBall, Trash } from "phosphor-react-native";
 import { Button, Container, Title, Info } from "./styles";
 
 interface Props {
@@ -12,6 +12,8 @@ export function PlayerCard({ name }: Props) {
   return (
     <Container>
       <Info>
+        <SoccerBall size={24} color={theme.COLORS.TITLE} />
+
         <Title numberOfLines={1}>{name}</Title>
       </Info>
       <Button>
