@@ -1,6 +1,10 @@
 import { FlatList } from "react-native";
 import { useTheme } from "styled-components";
 
+import * as yup from "yup";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 import { UserInfo } from "@components/UserInfo";
 import { Input } from "@components/Input";
 import { PlayerCard } from "@components/PlayerCard";
@@ -19,6 +23,14 @@ import {
   Title,
 } from "./styles";
 
+type FormDataProps = {
+  name: string;
+};
+
+const registerSchema = yup.object({
+  name: yup.string().trim().required("Informe o nome."),
+});
+
 export function Home() {
   const players = [
     { id: "1", name: "Marcelo" },
@@ -33,6 +45,15 @@ export function Home() {
 
   const theme = useTheme();
 
+  const { control, handleSubmit, reset } = useForm<FormDataProps>({
+    resolver: yupResolver(registerSchema),
+  });
+
+  function handleRegister({ name }: FormDataProps) {
+    console.log(name);
+    reset();
+  }
+
   return (
     <Container>
       <Header>
@@ -44,12 +65,22 @@ export function Home() {
 
       <Content>
         <Form>
-          <Input
-            placeholder="Digite o nome do jogador..."
-            width="83%"
-            autoComplete="off"
+          <Controller
+            control={control}
+            name="name"
+            render={({ field: { onChange, value } }) => (
+              <Input
+                placeholder="Digite o nome do jogador..."
+                width="83%"
+                autoComplete="off"
+                autoCorrect={false}
+                onChangeText={onChange}
+                value={value}
+              />
+            )}
           />
-          <AddButton>
+
+          <AddButton onPress={handleSubmit(handleRegister)}>
             <Plus size={24} color="white" weight="bold" />
           </AddButton>
         </Form>
