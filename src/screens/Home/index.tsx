@@ -9,13 +9,15 @@ import { UserInfo } from "@components/UserInfo";
 import { Input } from "@components/Input";
 import { PlayerCard } from "@components/PlayerCard";
 
-import { Plus, MoonStars } from "phosphor-react-native";
+import { Plus, MoonStars, SoccerBall } from "phosphor-react-native";
 
 import {
   AddButton,
   Button,
   Container,
   Content,
+  EmptyContent,
+  EmptyTitle,
   Form,
   Header,
   Info,
@@ -41,6 +43,8 @@ export function Home() {
     { id: "6", name: "Pedro Olimpio" },
     { id: "7", name: "PV" },
     { id: "8", name: "Junior" },
+    { id: "9", name: "Dirlandia" },
+    { id: "10", name: "Davi" },
   ];
 
   const theme = useTheme();
@@ -97,6 +101,12 @@ export function Home() {
             renderItem={({ item }) => <PlayerCard name={item.name} />}
             contentContainerStyle={{ paddingBottom: 24, paddingTop: 12 }}
             showsVerticalScrollIndicator={false}
+            ListEmptyComponent={() => (
+              <EmptyContent>
+                <SoccerBall size={48} color={theme.COLORS.TEXT} />
+                <EmptyTitle>Sem jogadores ainda!</EmptyTitle>
+              </EmptyContent>
+            )}
           />
         </Players>
       </Content>
