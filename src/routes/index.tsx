@@ -12,7 +12,7 @@ export function Routes() {
   return (
     <View style={{ flex: 1, backgroundColor: theme.COLORS.BACKGROUND }}>
       <NavigationContainer>
-        <AuthRoutes />
+        <TabRoutes />
       </NavigationContainer>
     </View>
   );
