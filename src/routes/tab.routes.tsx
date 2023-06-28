@@ -10,7 +10,7 @@ import { Home } from "@screens/Home";
 import { SortPage } from "@screens/SortPage";
 import { Profile } from "@screens/Profile";
 
-import { House, Shuffle, User } from "phosphor-react-native";
+import { House, SoccerBall, User } from "phosphor-react-native";
 
 type TabRoutes = {
   home: undefined;
@@ -64,7 +64,7 @@ export function TabRoutes() {
         component={SortPage}
         options={{
           tabBarIcon: ({ color }) => (
-            <Shuffle size={24} color={color} weight="bold" />
+            <SoccerBall size={24} color={color} weight="bold" />
           ),
         }}
       />

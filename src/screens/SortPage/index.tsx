@@ -1,9 +1,13 @@
-import { Container, Title } from "./styles";
+import { Container, Content, Header, HeaderTitle } from "./styles";
 
 export function SortPage() {
   return (
     <Container>
-      <Title>Sort Page</Title>
+      <Header>
+        <HeaderTitle>Forme seus times</HeaderTitle>
+      </Header>
+
+      <Content></Content>
     </Container>
   );
 }
