@@ -9,6 +9,8 @@ import { UserInfo } from "@components/UserInfo";
 import { Input } from "@components/Input";
 import { PlayerCard } from "@components/PlayerCard";
 
+import { useMatch } from "@hooks/useMatch";
+
 import { Plus, MoonStars, SoccerBall } from "phosphor-react-native";
 
 import {
@@ -34,18 +36,7 @@ const registerSchema = yup.object({
 });
 
 export function Home() {
-  const players = [
-    { id: "1", name: "Marcelo" },
-    { id: "2", name: "Lucas Barbosa" },
-    { id: "3", name: "Yago" },
-    { id: "4", name: "Jean" },
-    { id: "5", name: "Manel" },
-    { id: "6", name: "Pedro Olimpio" },
-    { id: "7", name: "PV" },
-    { id: "8", name: "Junior" },
-    { id: "9", name: "Dirlandia" },
-    { id: "10", name: "Davi" },
-  ];
+  const { players } = useMatch();
 
   const theme = useTheme();
 

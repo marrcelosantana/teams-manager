@@ -1,4 +1,4 @@
 export type PlayerDTO = {
   id: string;
-  nome: string;
+  name: string;
 };

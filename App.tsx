@@ -12,6 +12,7 @@ import {
   Inter_500Medium,
   Inter_700Bold,
 } from "@expo-google-fonts/inter";
+import { MatchContextProvider } from "@contexts/MatchContext";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -28,7 +29,9 @@ export default function App() {
           backgroundColor="transparent"
           translucent
         />
-        {fontsLoaded ? <Routes /> : <Loading />}
+        <MatchContextProvider>
+          {fontsLoaded ? <Routes /> : <Loading />}
+        </MatchContextProvider>
       </ThemeProvider>
     </NativeBaseProvider>
   );
