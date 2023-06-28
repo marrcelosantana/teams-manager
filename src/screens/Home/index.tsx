@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { FlatList } from "react-native";
 
 import { useToast } from "native-base";
@@ -14,9 +14,9 @@ import { useFocusEffect } from "@react-navigation/native";
 import { UserInfo } from "@components/UserInfo";
 import { Input } from "@components/Input";
 import { PlayerCard } from "@components/PlayerCard";
+import { Loading } from "@components/Loading";
 
 import { useMatch } from "@hooks/useMatch";
-import { useAuth } from "@hooks/useAuth";
 import { PlayerDTO } from "@models/PlayerDTO";
 
 import { Plus, MoonStars, SoccerBall } from "phosphor-react-native";
@@ -44,8 +44,8 @@ const registerSchema = yup.object({
 });
 
 export function Home() {
-  const { user } = useAuth();
   const { players, fetchPlayers, registerPlayer } = useMatch();
+  const [isLoading, setIsLoading] = useState(false);
 
   const theme = useTheme();
   const toast = useToast();
@@ -61,6 +61,7 @@ export function Home() {
 
   async function loadPlayers() {
     try {
+      setIsLoading(true);
       await fetchPlayers();
     } catch (error) {
       await toast.show({
@@ -69,6 +70,8 @@ export function Home() {
         background: "red.500",
         color: "gray.100",
       });
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -134,26 +137,30 @@ export function Home() {
           </AddButton>
         </Form>
 
-        <Players>
-          <Info>
-            <Title>Lista de jogadores</Title>
-            {players.length > 0 && <Title>{players.length}</Title>}
-          </Info>
+        {!isLoading ? (
+          <Players>
+            <Info>
+              <Title>Lista de jogadores</Title>
+              {players.length > 0 && <Title>{players.length}</Title>}
+            </Info>
 
-          <FlatList
-            data={players}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => <PlayerCard player={item} />}
-            contentContainerStyle={{ paddingBottom: 24, paddingTop: 12 }}
-            showsVerticalScrollIndicator={false}
-            ListEmptyComponent={() => (
-              <EmptyContent>
-                <SoccerBall size={48} color={theme.COLORS.TEXT} />
-                <EmptyTitle>Sem jogadores ainda!</EmptyTitle>
-              </EmptyContent>
-            )}
-          />
-        </Players>
+            <FlatList
+              data={players}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => <PlayerCard player={item} />}
+              contentContainerStyle={{ paddingBottom: 24, paddingTop: 12 }}
+              showsVerticalScrollIndicator={false}
+              ListEmptyComponent={() => (
+                <EmptyContent>
+                  <SoccerBall size={48} color={theme.COLORS.TEXT} />
+                  <EmptyTitle>Sem jogadores ainda!</EmptyTitle>
+                </EmptyContent>
+              )}
+            />
+          </Players>
+        ) : (
+          <Loading />
+        )}
       </Content>
     </Container>
   );

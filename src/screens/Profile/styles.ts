@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { Button } from "native-base";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 export const Container = styled.View`
@@ -58,13 +59,10 @@ export const Email = styled.Text`
   margin-top: 12px;
 `;
 
-export const SignOutButton = styled.TouchableOpacity`
+export const SignOutButton = styled(Button)`
   width: ${RFValue(140)}px;
   height: ${RFValue(42)}px;
   margin-top: ${RFPercentage(8)}px;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
   background-color: ${({ theme }) => theme.COLORS.ORANGE};
   border-radius: 6px;
 `;
@@ -72,6 +70,6 @@ export const SignOutButton = styled.TouchableOpacity`
 export const TextButton = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
   color: ${({ theme }) => theme.COLORS.WHITE};
-  font-size: ${RFValue(13)}px;
+  font-size: ${RFValue(14)}px;
   margin-left: 4px;
 `;

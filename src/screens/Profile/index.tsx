@@ -1,7 +1,9 @@
+import { useState } from "react";
+
 import { useTheme } from "styled-components";
-import { SignOut } from "phosphor-react-native";
 
 import { useAuth } from "@hooks/useAuth";
+import { Loading } from "@components/Loading";
 
 import {
   Container,
@@ -19,13 +21,17 @@ import {
 
 export function Profile() {
   const { user, signOut } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
   const theme = useTheme();
 
   async function handleSignOut() {
     try {
+      setIsLoading(true);
       await signOut();
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -35,20 +41,23 @@ export function Profile() {
         <HeaderTitle>Dados do Perfil</HeaderTitle>
       </Header>
 
-      <Content>
-        <ImageContainer>
-          <UserImage source={{ uri: user.picture }} />
-        </ImageContainer>
-        <Info>
-          <Username numberOfLines={1}>{user.name}</Username>
-          <Email>{user.email}</Email>
+      {!isLoading ? (
+        <Content>
+          <ImageContainer>
+            <UserImage source={{ uri: user.picture }} />
+          </ImageContainer>
+          <Info>
+            <Username numberOfLines={1}>{user.name}</Username>
+            <Email>{user.email}</Email>
 
-          <SignOutButton onPress={handleSignOut}>
-            <SignOut size={24} color={theme.COLORS.WHITE} weight="bold" />
-            <TextButton>Sair</TextButton>
-          </SignOutButton>
-        </Info>
-      </Content>
+            <SignOutButton onPress={handleSignOut} isLoading={isLoading}>
+              <TextButton>Sair</TextButton>
+            </SignOutButton>
+          </Info>
+        </Content>
+      ) : (
+        <Loading />
+      )}
     </Container>
   );
 }
