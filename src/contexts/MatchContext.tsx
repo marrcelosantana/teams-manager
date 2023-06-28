@@ -1,11 +1,18 @@
 import { createContext, ReactNode, useState } from "react";
+
 import { PlayerDTO } from "@models/PlayerDTO";
-import { createPlayer, getAllPlayers } from "@storage/storagePlayers";
+
+import {
+  createPlayer,
+  getAllPlayers,
+  removePlayerFromStorage,
+} from "@storage/storagePlayers";
 
 export type MatchContextDataProps = {
   players: PlayerDTO[];
   fetchPlayers: () => Promise<void>;
   registerPlayer: (player: PlayerDTO) => Promise<void>;
+  removePlayer: (playerId: string) => Promise<void>;
 };
 
 type MatchContextProviderProps = {
@@ -37,8 +44,19 @@ export function MatchContextProvider({ children }: MatchContextProviderProps) {
     }
   }
 
+  async function removePlayer(playerId: string) {
+    try {
+      await removePlayerFromStorage(playerId);
+      await fetchPlayers();
+    } catch (error) {
+      throw error;
+    }
+  }
+
   return (
-    <MatchContext.Provider value={{ players, fetchPlayers, registerPlayer }}>
+    <MatchContext.Provider
+      value={{ players, fetchPlayers, registerPlayer, removePlayer }}
+    >
       {children}
     </MatchContext.Provider>
   );

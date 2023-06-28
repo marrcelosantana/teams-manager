@@ -24,7 +24,7 @@ export async function createPlayer(player: PlayerDTO) {
   }
 }
 
-export async function removePlayer(playerId: string) {
+export async function removePlayerFromStorage(playerId: string) {
   try {
     const storage = await getAllPlayers();
     const storageFiltered = storage.filter((player) => player.id !== playerId);

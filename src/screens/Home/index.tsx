@@ -80,7 +80,7 @@ export function Home() {
       await registerPlayer(newPlayer);
       reset();
       await toast.show({
-        title: "Registro efetuado!",
+        title: `Bem vindo ao racha, ${newPlayer.name}! ⚽︎`,
         placement: "top",
         background: "green.500",
         color: "gray.100",
@@ -98,6 +98,7 @@ export function Home() {
   useFocusEffect(
     useCallback(() => {
       loadPlayers();
+      console.log(players);
     }, [])
   );
 
@@ -141,7 +142,7 @@ export function Home() {
           <FlatList
             data={players}
             keyExtractor={(item) => item.id}
-            renderItem={({ item }) => <PlayerCard name={item.name} />}
+            renderItem={({ item }) => <PlayerCard player={item} />}
             contentContainerStyle={{ paddingBottom: 24, paddingTop: 12 }}
             showsVerticalScrollIndicator={false}
             ListEmptyComponent={() => (
