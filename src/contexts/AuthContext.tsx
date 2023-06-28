@@ -1,6 +1,8 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 
 import * as AuthSession from "expo-auth-session";
+import * as AppleAuthentication from "expo-apple-authentication";
+
 import { UserDTO } from "@models/UserDTO";
 
 import {
@@ -12,6 +14,7 @@ import {
 export type AuthContextProps = {
   user: UserDTO;
   signInWithGoogle: () => Promise<void>;
+  signInWithApple: () => Promise<void>;
   signOut: () => Promise<void>;
 };
 
@@ -69,6 +72,34 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     }
   }
 
+  async function signInWithApple() {
+    try {
+      const credential = await AppleAuthentication.signInAsync({
+        requestedScopes: [
+          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+          AppleAuthentication.AppleAuthenticationScope.EMAIL,
+        ],
+      });
+
+      if (credential) {
+        const name = credential.fullName!.givenName!;
+        const picture = `https://ui-avatars.com/api/?name=${name}&lenght=1`;
+
+        const userInfo = {
+          id: String(credential.user),
+          email: credential.email!,
+          name,
+          picture,
+        };
+
+        setUser(userInfo);
+        await storageUserCreate(userInfo);
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async function signOut() {
     try {
       await storageUserRemove();
@@ -92,7 +123,9 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, signInWithGoogle, signOut }}>
+    <AuthContext.Provider
+      value={{ user, signInWithGoogle, signInWithApple, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   );

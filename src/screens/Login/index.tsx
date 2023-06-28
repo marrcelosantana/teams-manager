@@ -20,13 +20,21 @@ import {
 } from "./styles";
 
 export function Login() {
-  const { signInWithGoogle } = useAuth();
+  const { signInWithGoogle, signInWithApple } = useAuth();
 
   const theme = useTheme();
 
   async function handleSignInWithGoogle() {
     try {
       await signInWithGoogle();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function handleSignInWithApple() {
+    try {
+      await signInWithApple();
     } catch (error) {
       console.log(error);
     }
@@ -51,7 +59,11 @@ export function Login() {
             onPress={handleSignInWithGoogle}
           />
           {Platform.OS === "ios" && (
-            <SocialButton title="Entrar com Apple" svg={AppleSvg} />
+            <SocialButton
+              title="Entrar com Apple"
+              svg={AppleSvg}
+              onPress={handleSignInWithApple}
+            />
           )}
         </Social>
       </Footer>
