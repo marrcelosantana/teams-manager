@@ -1,8 +1,11 @@
 import { createContext, ReactNode, useState } from "react";
 import { PlayerDTO } from "@models/PlayerDTO";
+import { createPlayer, getAllPlayers } from "@storage/storagePlayers";
 
 export type MatchContextDataProps = {
   players: PlayerDTO[];
+  fetchPlayers: () => Promise<void>;
+  registerPlayer: (player: PlayerDTO) => Promise<void>;
 };
 
 type MatchContextProviderProps = {
@@ -14,16 +17,28 @@ export const MatchContext = createContext<MatchContextDataProps>(
 );
 
 export function MatchContextProvider({ children }: MatchContextProviderProps) {
-  const [players, setPlayers] = useState<PlayerDTO[]>([
-    { id: "1", name: "Marcelo" },
-    { id: "2", name: "Yago" },
-    { id: "3", name: "Barbosa" },
-    { id: "4", name: "Davi" },
-    { id: "5", name: "Jaime" },
-  ]);
+  const [players, setPlayers] = useState<PlayerDTO[]>([]);
+
+  async function fetchPlayers() {
+    try {
+      const data = await getAllPlayers();
+      setPlayers(data);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async function registerPlayer(player: PlayerDTO) {
+    try {
+      await createPlayer(player);
+      await fetchPlayers();
+    } catch (error) {
+      throw error;
+    }
+  }
 
   return (
-    <MatchContext.Provider value={{ players }}>
+    <MatchContext.Provider value={{ players, fetchPlayers, registerPlayer }}>
       {children}
     </MatchContext.Provider>
   );

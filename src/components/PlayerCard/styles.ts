@@ -23,6 +23,7 @@ export const Title = styled.Text`
   color: ${({ theme }) => theme.COLORS.TITLE};
   width: 85%;
   margin-left: 5px;
+  text-transform: capitalize;
 `;
 
 export const Button = styled.Pressable``;

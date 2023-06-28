@@ -1,15 +1,22 @@
+import { useCallback } from "react";
 import { FlatList } from "react-native";
+
+import { useToast } from "native-base";
 import { useTheme } from "styled-components";
 
 import * as yup from "yup";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import uuid from "react-native-uuid";
+import { useFocusEffect } from "@react-navigation/native";
+
 import { UserInfo } from "@components/UserInfo";
 import { Input } from "@components/Input";
 import { PlayerCard } from "@components/PlayerCard";
 
 import { useMatch } from "@hooks/useMatch";
+import { PlayerDTO } from "@models/PlayerDTO";
 
 import { Plus, MoonStars, SoccerBall } from "phosphor-react-native";
 
@@ -36,18 +43,58 @@ const registerSchema = yup.object({
 });
 
 export function Home() {
-  const { players } = useMatch();
+  const { players, fetchPlayers, registerPlayer } = useMatch();
 
   const theme = useTheme();
+  const toast = useToast();
 
   const { control, handleSubmit, reset } = useForm<FormDataProps>({
     resolver: yupResolver(registerSchema),
   });
 
-  function handleRegister({ name }: FormDataProps) {
-    console.log(name);
-    reset();
+  async function loadPlayers() {
+    try {
+      await fetchPlayers();
+    } catch (error) {
+      await toast.show({
+        title: "Não foi possível carregar os dados!",
+        placement: "top",
+        background: "red.500",
+        color: "gray.100",
+      });
+    }
   }
+
+  async function handleRegister({ name }: FormDataProps) {
+    const newPlayer: PlayerDTO = {
+      id: String(uuid.v4()),
+      name,
+    };
+
+    try {
+      await registerPlayer(newPlayer);
+      reset();
+      await toast.show({
+        title: "Registro efetuado!",
+        placement: "top",
+        background: "green.500",
+        color: "gray.100",
+      });
+    } catch (error) {
+      await toast.show({
+        title: "Não foi possível registrar!",
+        placement: "top",
+        background: "red.500",
+        color: "gray.100",
+      });
+    }
+  }
+
+  useFocusEffect(
+    useCallback(() => {
+      loadPlayers();
+    }, [])
+  );
 
   return (
     <Container>
