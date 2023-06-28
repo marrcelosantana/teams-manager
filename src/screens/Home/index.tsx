@@ -39,7 +39,7 @@ type FormDataProps = {
 };
 
 const registerSchema = yup.object({
-  name: yup.string().trim().required("Informe o nome."),
+  name: yup.string().trim().required("Informe o nome do jogador."),
 });
 
 export function Home() {
@@ -48,7 +48,12 @@ export function Home() {
   const theme = useTheme();
   const toast = useToast();
 
-  const { control, handleSubmit, reset } = useForm<FormDataProps>({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormDataProps>({
     resolver: yupResolver(registerSchema),
   });
 
@@ -113,11 +118,11 @@ export function Home() {
             render={({ field: { onChange, value } }) => (
               <Input
                 placeholder="Digite o nome do jogador..."
-                width="83%"
                 autoComplete="off"
                 autoCorrect={false}
                 onChangeText={onChange}
                 value={value}
+                errorMessage={errors.name?.message}
               />
             )}
           />

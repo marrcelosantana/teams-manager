@@ -1,23 +1,37 @@
 import { useTheme } from "styled-components/native";
 
-import { Input as NativeBaseInput, IInputProps } from "native-base";
+import {
+  Input as NativeBaseInput,
+  IInputProps,
+  FormControl,
+} from "native-base";
 
-export function Input({ ...rest }: IInputProps) {
+interface Props extends IInputProps {
+  errorMessage?: string | null;
+}
+
+export function Input({ errorMessage = null, isInvalid, ...rest }: Props) {
   const theme = useTheme();
+  const invalid = !!errorMessage || isInvalid;
 
   return (
-    <NativeBaseInput
-      bg={theme.COLORS.WHITE}
-      height="48px"
-      borderRadius={0}
-      fontFamily={theme.FONT_FAMILY.REGULAR}
-      fontSize={14}
-      color={theme.COLORS.TEXT}
-      _focus={{
-        bg: theme.COLORS.WHITE,
-        borderColor: theme.COLORS.ORANGE,
-      }}
-      {...rest}
-    />
+    <FormControl isInvalid={invalid} w={"83%"}>
+      <NativeBaseInput
+        bg={theme.COLORS.WHITE}
+        height="48px"
+        borderRadius={0}
+        fontFamily={theme.FONT_FAMILY.REGULAR}
+        fontSize={14}
+        color={theme.COLORS.TEXT}
+        _focus={{
+          bg: theme.COLORS.WHITE,
+          borderColor: theme.COLORS.LIGHT_PURPLE,
+        }}
+        {...rest}
+      />
+      <FormControl.ErrorMessage _text={{ color: "red.500" }}>
+        {errorMessage}
+      </FormControl.ErrorMessage>
+    </FormControl>
   );
 }
