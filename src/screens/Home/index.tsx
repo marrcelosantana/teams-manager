@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { FlatList } from "react-native";
 
-import { useToast } from "native-base";
+import { View, useToast } from "native-base";
 import { useTheme } from "styled-components";
 
 import * as yup from "yup";
@@ -17,7 +17,7 @@ import { PlayerCard } from "@components/PlayerCard";
 import { Loading } from "@components/Loading";
 
 import { useMatch } from "@hooks/useMatch";
-import { PlayerDTO } from "@models/PlayerDTO";
+import { PlayerDTO } from "src/models/PlayerDTO";
 
 import { Plus, MoonStars, SoccerBall } from "phosphor-react-native";
 
@@ -121,14 +121,16 @@ export function Home() {
             control={control}
             name="name"
             render={({ field: { onChange, value } }) => (
-              <Input
-                placeholder="Digite o nome do jogador..."
-                autoComplete="off"
-                autoCorrect={false}
-                onChangeText={onChange}
-                value={value}
-                errorMessage={errors.name?.message}
-              />
+              <View style={{ width: "83%" }}>
+                <Input
+                  placeholder="Digite o nome do jogador..."
+                  autoComplete="off"
+                  autoCorrect={false}
+                  onChangeText={onChange}
+                  value={value}
+                  errorMessage={errors.name?.message}
+                />
+              </View>
             )}
           />
 

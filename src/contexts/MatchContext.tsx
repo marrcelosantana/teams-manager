@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useState } from "react";
 
-import { PlayerDTO } from "@models/PlayerDTO";
+import { PlayerDTO } from "src/models/PlayerDTO";
 import { useAuth } from "@hooks/useAuth";
 
 import {

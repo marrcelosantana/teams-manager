@@ -3,7 +3,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import * as AuthSession from "expo-auth-session";
 import * as AppleAuthentication from "expo-apple-authentication";
 
-import { UserDTO } from "@models/UserDTO";
+import { UserDTO } from "src/models/UserDTO";
 
 import {
   storageUserCreate,

@@ -5,7 +5,7 @@ import { useTheme } from "styled-components";
 
 import { SoccerBall, Trash } from "phosphor-react-native";
 
-import { PlayerDTO } from "@models/PlayerDTO";
+import { PlayerDTO } from "src/models/PlayerDTO";
 import { useMatch } from "@hooks/useMatch";
 
 import { Button, Container, Title, Info } from "./styles";

@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { PLAYER_STORAGE } from "@storage/storageConfig";
-import { PlayerDTO } from "@models/PlayerDTO";
+import { PlayerDTO } from "src/models/PlayerDTO";
 
 export async function getAllPlayers(userId: string) {
   try {

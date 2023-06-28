@@ -15,7 +15,7 @@ export function Input({ errorMessage = null, isInvalid, ...rest }: Props) {
   const invalid = !!errorMessage || isInvalid;
 
   return (
-    <FormControl isInvalid={invalid} w={"83%"}>
+    <FormControl isInvalid={invalid}>
       <NativeBaseInput
         bg={theme.COLORS.WHITE}
         height="48px"

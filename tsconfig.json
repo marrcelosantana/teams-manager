@@ -9,7 +9,7 @@
       "@components/*": ["./src/components/*"],
       "@contexts/*": ["./src/contexts/*"],
       "@hooks/*": ["./src/hooks/*"],
-      "@models/*": ["./src/models/*"],
+      "@models/*": ["src/models/*"],
       "@routes/*": ["./src/routes/*"],
       "@services/*": ["./src/services/*"],
       "@screens/*": ["./src/screens/*"],

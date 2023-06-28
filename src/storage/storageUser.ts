@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { USER_STORAGE } from "./storageConfig";
-import { UserDTO } from "@models/UserDTO";
+import { UserDTO } from "src/models/UserDTO";
 
 export async function storageUserGet() {
   try {
