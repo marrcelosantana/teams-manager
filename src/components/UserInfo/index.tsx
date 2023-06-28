@@ -1,3 +1,5 @@
+import { useAuth } from "@hooks/useAuth";
+
 import {
   Avatar,
   Container,
@@ -8,17 +10,16 @@ import {
 } from "./styles";
 
 export function UserInfo() {
+  const { user } = useAuth();
+
   return (
     <Container>
       <ProfileButton onPress={() => {}}>
-        <Avatar
-          source={{ uri: "http://github.com/marrcelosantana.png" }}
-          resizeMode="cover"
-        />
+        <Avatar source={{ uri: user.picture }} resizeMode="cover" />
       </ProfileButton>
 
       <Info>
-        <Title numberOfLines={1}>Olá, Marcelo!</Title>
+        <Title numberOfLines={1}>Olá, {user.given_name}!</Title>
         <Subtitle>Forme seus times aqui.</Subtitle>
       </Info>
     </Container>

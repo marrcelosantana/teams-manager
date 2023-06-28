@@ -7,6 +7,7 @@ import GoogleSvg from "../../assets/google.svg";
 import { SoccerBall } from "phosphor-react-native";
 
 import { SocialButton } from "@components/Social Button";
+import { useAuth } from "@hooks/useAuth";
 
 import {
   Container,
@@ -19,7 +20,17 @@ import {
 } from "./styles";
 
 export function Login() {
+  const { signInWithGoogle } = useAuth();
+
   const theme = useTheme();
+
+  async function handleSignInWithGoogle() {
+    try {
+      await signInWithGoogle();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <Container>
@@ -34,7 +45,11 @@ export function Login() {
 
       <Footer>
         <Social>
-          <SocialButton title="Entrar com Google" svg={GoogleSvg} />
+          <SocialButton
+            title="Entrar com Google"
+            svg={GoogleSvg}
+            onPress={handleSignInWithGoogle}
+          />
           {Platform.OS === "ios" && (
             <SocialButton title="Entrar com Apple" svg={AppleSvg} />
           )}

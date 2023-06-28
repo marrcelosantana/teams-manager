@@ -16,6 +16,7 @@ import { Input } from "@components/Input";
 import { PlayerCard } from "@components/PlayerCard";
 
 import { useMatch } from "@hooks/useMatch";
+import { useAuth } from "@hooks/useAuth";
 import { PlayerDTO } from "@models/PlayerDTO";
 
 import { Plus, MoonStars, SoccerBall } from "phosphor-react-native";
@@ -43,6 +44,7 @@ const registerSchema = yup.object({
 });
 
 export function Home() {
+  const { user } = useAuth();
   const { players, fetchPlayers, registerPlayer } = useMatch();
 
   const theme = useTheme();
@@ -98,7 +100,6 @@ export function Home() {
   useFocusEffect(
     useCallback(() => {
       loadPlayers();
-      console.log(players);
     }, [])
   );
 

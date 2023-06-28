@@ -2,6 +2,7 @@
   "expo": {
     "name": "teams-manager",
     "slug": "teams-manager",
+    "scheme": "teams-manager",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

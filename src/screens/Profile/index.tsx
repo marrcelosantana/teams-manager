@@ -1,6 +1,8 @@
 import { useTheme } from "styled-components";
 import { SignOut } from "phosphor-react-native";
 
+import { useAuth } from "@hooks/useAuth";
+
 import {
   Container,
   Content,
@@ -16,7 +18,16 @@ import {
 } from "./styles";
 
 export function Profile() {
+  const { user, signOut } = useAuth();
   const theme = useTheme();
+
+  async function handleSignOut() {
+    try {
+      await signOut();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <Container>
@@ -26,15 +37,13 @@ export function Profile() {
 
       <Content>
         <ImageContainer>
-          <UserImage
-            source={{ uri: "http://github.com/marrcelosantana.png" }}
-          />
+          <UserImage source={{ uri: user.picture }} />
         </ImageContainer>
         <Info>
-          <Username numberOfLines={1}>Marcelo Santana Marques</Username>
-          <Email>marcelo@email.com</Email>
+          <Username numberOfLines={1}>{user.name}</Username>
+          <Email>{user.email}</Email>
 
-          <SignOutButton>
+          <SignOutButton onPress={handleSignOut}>
             <SignOut size={24} color={theme.COLORS.WHITE} weight="bold" />
             <TextButton>Sair</TextButton>
           </SignOutButton>
