@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useState } from "react";
 
 import { PlayerDTO } from "@models/PlayerDTO";
+import { useAuth } from "@hooks/useAuth";
 
 import {
   createPlayer,
@@ -24,11 +25,12 @@ export const MatchContext = createContext<MatchContextDataProps>(
 );
 
 export function MatchContextProvider({ children }: MatchContextProviderProps) {
+  const { user } = useAuth();
   const [players, setPlayers] = useState<PlayerDTO[]>([]);
 
   async function fetchPlayers() {
     try {
-      const data = await getAllPlayers();
+      const data = await getAllPlayers(user.id);
       setPlayers(data);
     } catch (error) {
       throw error;
@@ -37,7 +39,7 @@ export function MatchContextProvider({ children }: MatchContextProviderProps) {
 
   async function registerPlayer(player: PlayerDTO) {
     try {
-      await createPlayer(player);
+      await createPlayer(player, user.id);
       await fetchPlayers();
     } catch (error) {
       throw error;
@@ -46,7 +48,7 @@ export function MatchContextProvider({ children }: MatchContextProviderProps) {
 
   async function removePlayer(playerId: string) {
     try {
-      await removePlayerFromStorage(playerId);
+      await removePlayerFromStorage(playerId, user.id);
       await fetchPlayers();
     } catch (error) {
       throw error;

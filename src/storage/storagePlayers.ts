@@ -2,9 +2,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { PLAYER_STORAGE } from "@storage/storageConfig";
 import { PlayerDTO } from "@models/PlayerDTO";
 
-export async function getAllPlayers() {
+export async function getAllPlayers(userId: string) {
   try {
-    const storage = await AsyncStorage.getItem(PLAYER_STORAGE);
+    const storage = await AsyncStorage.getItem(
+      `${PLAYER_STORAGE}_user:${userId}`
+    );
     const players: PlayerDTO[] = storage ? JSON.parse(storage) : [];
 
     return players;
@@ -13,24 +15,27 @@ export async function getAllPlayers() {
   }
 }
 
-export async function createPlayer(player: PlayerDTO) {
+export async function createPlayer(player: PlayerDTO, userId: string) {
   try {
-    const storage = await getAllPlayers();
+    const storage = await getAllPlayers(userId);
     const newStorage = JSON.stringify([player, ...storage]);
 
-    await AsyncStorage.setItem(PLAYER_STORAGE, newStorage);
+    await AsyncStorage.setItem(`${PLAYER_STORAGE}_user:${userId}`, newStorage);
   } catch (error) {
     throw error;
   }
 }
 
-export async function removePlayerFromStorage(playerId: string) {
+export async function removePlayerFromStorage(
+  playerId: string,
+  userId: string
+) {
   try {
-    const storage = await getAllPlayers();
+    const storage = await getAllPlayers(userId);
     const storageFiltered = storage.filter((player) => player.id !== playerId);
     const newStorage = JSON.stringify(storageFiltered);
 
-    await AsyncStorage.setItem(PLAYER_STORAGE, newStorage);
+    await AsyncStorage.setItem(`${PLAYER_STORAGE}_user:${userId}`, newStorage);
   } catch (error) {
     throw error;
   }
