@@ -24,12 +24,12 @@ export function PlayerCard({ player }: Props) {
     try {
       await removePlayer(player.id);
 
-      await toast.show({
-        title: `${player.name} saiu do racha! ❌`,
-        placement: "top",
-        background: theme.COLORS.ORANGE,
-        color: "gray.100",
-      });
+      // await toast.show({
+      //   title: `${player.name} saiu do racha! ❌`,
+      //   placement: "top",
+      //   background: theme.COLORS.ORANGE,
+      //   color: "gray.100",
+      // });
     } catch (error) {
       await toast.show({
         title: "Não foi possível remover o jogador!",

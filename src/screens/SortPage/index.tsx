@@ -1,4 +1,7 @@
-import { FlatList, Keyboard, TouchableWithoutFeedback } from "react-native";
+import { FlatList } from "react-native";
+
+import { useNavigation } from "@react-navigation/native";
+import { AppNavigatorRoutesProps } from "@routes/app.routes";
 
 import { Input } from "@components/Input";
 import { useMatch } from "@hooks/useMatch";
@@ -20,6 +23,12 @@ import {
 
 export function SortPage() {
   const { players } = useMatch();
+
+  const navigator = useNavigation<AppNavigatorRoutesProps>();
+
+  function sortTeams() {
+    navigator.navigate("teams");
+  }
 
   return (
     <Container>
@@ -60,7 +69,7 @@ export function SortPage() {
         </Players>
 
         <Actions>
-          <SortButton>
+          <SortButton onPress={sortTeams} isDisabled={players.length === 0}>
             <TextButton>Sortear times</TextButton>
           </SortButton>
         </Actions>

@@ -84,12 +84,12 @@ export function Home() {
     try {
       await registerPlayer(newPlayer);
       reset();
-      await toast.show({
-        title: `Bem vindo ao racha, ${newPlayer.name}! ⚽︎`,
-        placement: "top",
-        background: "green.500",
-        color: "gray.100",
-      });
+      // await toast.show({
+      //   title: `Bem vindo ao racha, ${newPlayer.name}! ⚽︎`,
+      //   placement: "top",
+      //   background: "green.500",
+      //   color: "gray.100",
+      // });
     } catch (error) {
       await toast.show({
         title: "Não foi possível registrar!",
