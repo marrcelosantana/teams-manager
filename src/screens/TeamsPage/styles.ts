@@ -26,5 +26,6 @@ export const BackButton = styled.Pressable``;
 
 export const Content = styled.View`
   flex: 1;
-  padding: 24px 20px 0 20px;
+  padding: 48px 20px 0 20px;
+  align-items: center;
 `;

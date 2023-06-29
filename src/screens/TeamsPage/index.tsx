@@ -1,5 +1,8 @@
 import { ArrowLeft } from "phosphor-react-native";
 import { useNavigation } from "@react-navigation/native";
+
+import { TeamCard } from "@components/TeamCard";
+
 import { BackButton, Container, Content, Header, HeaderTitle } from "./styles";
 
 export function TeamsPage() {
@@ -14,7 +17,10 @@ export function TeamsPage() {
         <HeaderTitle>Times Formados</HeaderTitle>
         <BackButton />
       </Header>
-      <Content></Content>
+      <Content>
+        <TeamCard />
+        <TeamCard />
+      </Content>
     </Container>
   );
 }
