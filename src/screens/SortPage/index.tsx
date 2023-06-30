@@ -21,6 +21,11 @@ import {
   TextMiniCard,
 } from "./styles";
 
+type FormDataProps = {
+  teams_quantity: number;
+  players_by_team_quantity: number;
+};
+
 export function SortPage() {
   const { players } = useMatch();
 
