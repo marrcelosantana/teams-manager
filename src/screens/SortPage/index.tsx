@@ -3,6 +3,10 @@ import { FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AppNavigatorRoutesProps } from "@routes/app.routes";
 
+import * as yup from "yup";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 import { Input } from "@components/Input";
 import { useMatch } from "@hooks/useMatch";
 
@@ -22,17 +26,40 @@ import {
 } from "./styles";
 
 type FormDataProps = {
-  teams_quantity: number;
-  players_by_team_quantity: number;
+  teams_quantity: string;
+  players_by_team_quantity: string;
 };
+
+const createMatchSchema = yup.object({
+  teams_quantity: yup
+    .string()
+    .required("Informe a quantidade de times.")
+    .typeError("Informe um valor numérico."),
+  players_by_team_quantity: yup
+    .string()
+    .required("Informe a quantidade de jogadores.")
+    .typeError("Informe um valor numérico."),
+});
 
 export function SortPage() {
   const { players } = useMatch();
 
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormDataProps>({
+    resolver: yupResolver(createMatchSchema),
+  });
+
   const navigator = useNavigation<AppNavigatorRoutesProps>();
 
-  function sortTeams() {
-    navigator.navigate("teams");
+  function handleCreateMatch({
+    teams_quantity,
+    players_by_team_quantity,
+  }: FormDataProps) {
+    console.log({ teams_quantity, players_by_team_quantity });
   }
 
   return (
@@ -44,12 +71,34 @@ export function SortPage() {
       <Content>
         <Form>
           <Label>Quantos times?</Label>
-          <Input placeholder="Quantidade de times..." keyboardType="numeric" />
+          <Controller
+            control={control}
+            name="teams_quantity"
+            render={({ field: { onChange, value } }) => (
+              <Input
+                placeholder="Quantidade de times..."
+                keyboardType="numeric"
+                onChangeText={onChange}
+                value={value}
+                // errorMessage={errors.teams_quantity?.message}
+              />
+            )}
+          />
 
           <Label style={{ marginTop: 16 }}>Quantos jogadores por time?</Label>
-          <Input
-            placeholder="Quantidade de jogadores..."
-            keyboardType="numeric"
+
+          <Controller
+            control={control}
+            name="players_by_team_quantity"
+            render={({ field: { onChange, value } }) => (
+              <Input
+                placeholder="Quantidade de jogadores..."
+                keyboardType="numeric"
+                onChangeText={onChange}
+                value={value}
+                // errorMessage={errors.players_by_team_quantity?.message}
+              />
+            )}
           />
         </Form>
 
@@ -74,7 +123,10 @@ export function SortPage() {
         </Players>
 
         <Actions>
-          <SortButton onPress={sortTeams} isDisabled={players.length === 0}>
+          <SortButton
+            onPress={handleSubmit(handleCreateMatch)}
+            isDisabled={players.length === 0}
+          >
             <TextButton>Sortear times</TextButton>
           </SortButton>
         </Actions>

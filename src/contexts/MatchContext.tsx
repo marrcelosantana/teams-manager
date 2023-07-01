@@ -4,9 +4,9 @@ import { PlayerDTO } from "src/models/PlayerDTO";
 import { useAuth } from "@hooks/useAuth";
 
 import {
-  createPlayer,
-  getAllPlayers,
-  removePlayerFromStorage,
+  storageCreatePlayer,
+  storageGetAllPlayers,
+  storageRemovePlayer,
 } from "@storage/storagePlayers";
 
 export type MatchContextDataProps = {
@@ -30,7 +30,7 @@ export function MatchContextProvider({ children }: MatchContextProviderProps) {
 
   async function fetchPlayers() {
     try {
-      const data = await getAllPlayers(user.id);
+      const data = await storageGetAllPlayers(user.id);
       setPlayers(data);
     } catch (error) {
       throw error;
@@ -39,7 +39,7 @@ export function MatchContextProvider({ children }: MatchContextProviderProps) {
 
   async function registerPlayer(player: PlayerDTO) {
     try {
-      await createPlayer(player, user.id);
+      await storageCreatePlayer(player, user.id);
       await fetchPlayers();
     } catch (error) {
       throw error;
@@ -48,7 +48,7 @@ export function MatchContextProvider({ children }: MatchContextProviderProps) {
 
   async function removePlayer(playerId: string) {
     try {
-      await removePlayerFromStorage(playerId, user.id);
+      await storageRemovePlayer(playerId, user.id);
       await fetchPlayers();
     } catch (error) {
       throw error;

@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { PLAYER_STORAGE } from "@storage/storageConfig";
 import { PlayerDTO } from "src/models/PlayerDTO";
 
-export async function getAllPlayers(userId: string) {
+export async function storageGetAllPlayers(userId: string) {
   try {
     const storage = await AsyncStorage.getItem(
       `${PLAYER_STORAGE}_user:${userId}`
@@ -15,9 +15,9 @@ export async function getAllPlayers(userId: string) {
   }
 }
 
-export async function createPlayer(player: PlayerDTO, userId: string) {
+export async function storageCreatePlayer(player: PlayerDTO, userId: string) {
   try {
-    const storage = await getAllPlayers(userId);
+    const storage = await storageGetAllPlayers(userId);
     const newStorage = JSON.stringify([player, ...storage]);
 
     await AsyncStorage.setItem(`${PLAYER_STORAGE}_user:${userId}`, newStorage);
@@ -26,12 +26,9 @@ export async function createPlayer(player: PlayerDTO, userId: string) {
   }
 }
 
-export async function removePlayerFromStorage(
-  playerId: string,
-  userId: string
-) {
+export async function storageRemovePlayer(playerId: string, userId: string) {
   try {
-    const storage = await getAllPlayers(userId);
+    const storage = await storageGetAllPlayers(userId);
     const storageFiltered = storage.filter((player) => player.id !== playerId);
     const newStorage = JSON.stringify(storageFiltered);
 
