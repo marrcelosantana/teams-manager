@@ -80,7 +80,6 @@ export function SortPage() {
                 keyboardType="numeric"
                 onChangeText={onChange}
                 value={value}
-                // errorMessage={errors.teams_quantity?.message}
               />
             )}
           />
@@ -96,7 +95,6 @@ export function SortPage() {
                 keyboardType="numeric"
                 onChangeText={onChange}
                 value={value}
-                // errorMessage={errors.players_by_team_quantity?.message}
               />
             )}
           />
