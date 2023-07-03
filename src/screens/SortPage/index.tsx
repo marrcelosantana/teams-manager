@@ -10,6 +10,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "@components/Input";
 import { useMatch } from "@hooks/useMatch";
 
+import { useToast } from "native-base";
+
 import {
   Actions,
   Container,
@@ -54,12 +56,24 @@ export function SortPage() {
   });
 
   const navigator = useNavigation<AppNavigatorRoutesProps>();
+  const toast = useToast();
 
-  function handleCreateMatch({
+  async function handleCreateMatch({
     teams_quantity,
     players_by_team_quantity,
   }: FormDataProps) {
-    console.log({ teams_quantity, players_by_team_quantity });
+    try {
+      console.log({ teams_quantity, players_by_team_quantity });
+      reset();
+      navigator.navigate("teams");
+    } catch (error) {
+      await toast.show({
+        title: "Não foi possível sortear os times!",
+        placement: "top",
+        background: "red.500",
+        color: "gray.100",
+      });
+    }
   }
 
   return (

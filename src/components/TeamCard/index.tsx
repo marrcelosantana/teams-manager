@@ -1,7 +1,11 @@
 import { FlatList } from "react-native";
 import { Container, Content, Header, HeaderTitle, Name } from "./styles";
 
-export function TeamCard() {
+interface Props {
+  teamName: string;
+}
+
+export function TeamCard({ teamName }: Props) {
   const players = [
     { id: "1", name: "Marcelo" },
     { id: "2", name: "Yago" },
@@ -13,7 +17,7 @@ export function TeamCard() {
   return (
     <Container>
       <Header>
-        <HeaderTitle>Time 1</HeaderTitle>
+        <HeaderTitle>Time {teamName}</HeaderTitle>
       </Header>
 
       <Content>

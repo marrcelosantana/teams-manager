@@ -18,8 +18,9 @@ export function TeamsPage() {
         <BackButton />
       </Header>
       <Content>
-        <TeamCard />
-        <TeamCard />
+        <TeamCard teamName="1" />
+        <TeamCard teamName="2" />
+        <TeamCard teamName="3" />
       </Content>
     </Container>
   );
