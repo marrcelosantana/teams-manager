@@ -35,7 +35,6 @@ interface AuthorizationResponse {
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [user, setUser] = useState<UserDTO>({} as UserDTO);
-  const [isLoading, setIsLoading] = useState(false);
 
   async function signInWithGoogle() {
     try {

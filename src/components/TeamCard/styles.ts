@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 
 export const Container = styled.View`
   width: ${RFValue(220)}px;
-  height: ${RFValue(140)}px;
+  min-height: ${RFValue(140)}px;
   margin-bottom: 12px;
   border: 0.5px solid ${({ theme }) => theme.COLORS.PURPLE};
   border-radius: 8px;
@@ -27,11 +27,11 @@ export const HeaderTitle = styled.Text`
 
 export const Content = styled.View`
   flex: 1;
-  padding: 10px 20px 0 20px;
+  padding: 10px 20px 20px 20px;
 `;
 
 export const Name = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.MEDIUM};
   font-size: 14px;
-  margin-bottom: 2px;
+  margin-bottom: 5px;
 `;

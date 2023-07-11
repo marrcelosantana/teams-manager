@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FlatList } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
@@ -8,6 +9,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Input } from "@components/Input";
+import { TeamDTO } from "@models/TeamDTO";
 import { useMatch } from "@hooks/useMatch";
 
 import { useToast } from "native-base";
@@ -29,7 +31,7 @@ import {
 
 type FormDataProps = {
   teams_quantity: string;
-  players_by_team_quantity: string;
+  players_per_team: string;
 };
 
 const createMatchSchema = yup.object({
@@ -37,7 +39,7 @@ const createMatchSchema = yup.object({
     .string()
     .required("Informe a quantidade de times.")
     .typeError("Informe um valor numérico."),
-  players_by_team_quantity: yup
+  players_per_team: yup
     .string()
     .required("Informe a quantidade de jogadores.")
     .typeError("Informe um valor numérico."),
@@ -46,26 +48,49 @@ const createMatchSchema = yup.object({
 export function SortPage() {
   const { players } = useMatch();
 
-  const {
-    control,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<FormDataProps>({
+  const { control, handleSubmit, reset } = useForm<FormDataProps>({
     resolver: yupResolver(createMatchSchema),
   });
+
+  const [teams, setTeams] = useState<TeamDTO[]>([]);
 
   const navigator = useNavigation<AppNavigatorRoutesProps>();
   const toast = useToast();
 
   async function handleCreateMatch({
     teams_quantity,
-    players_by_team_quantity,
+    players_per_team,
   }: FormDataProps) {
     try {
-      console.log({ teams_quantity, players_by_team_quantity });
+      const totalPlayers = players.length;
+      const teamsQuantity = Number(teams_quantity);
+      const playersPerTeam = Number(players_per_team);
+      const totalTeams = teamsQuantity * playersPerTeam;
+
+      const shuffledPlayers = [...players].sort(() => Math.random() - 0.5);
+      const newTeams: TeamDTO[] = [];
+
+      if (totalTeams > totalPlayers) {
+        await toast.show({
+          title: "Não é possível sortear os times!",
+          description:
+            "A quantidade de times é maior que a quantidade de jogadores.",
+          placement: "top",
+          background: "red.500",
+          color: "gray.100",
+        });
+
+        return;
+      }
+
+      for (let i = 0; i < teamsQuantity; i++) {
+        const teamPlayers = shuffledPlayers.splice(0, playersPerTeam);
+        newTeams.push({ id: i + 1, players: teamPlayers });
+        setTeams(newTeams);
+      }
+
       reset();
-      navigator.navigate("teams");
+      navigator.navigate("teams", { teams: teams });
     } catch (error) {
       await toast.show({
         title: "Não foi possível sortear os times!",
@@ -102,7 +127,7 @@ export function SortPage() {
 
           <Controller
             control={control}
-            name="players_by_team_quantity"
+            name="players_per_team"
             render={({ field: { onChange, value } }) => (
               <Input
                 placeholder="Quantidade de jogadores..."

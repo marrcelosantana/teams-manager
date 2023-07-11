@@ -6,9 +6,11 @@ import {
 import { TabRoutes } from "./tab.routes";
 import { TeamsPage } from "@screens/TeamsPage";
 
+import { TeamDTO } from "@models/TeamDTO";
+
 type AppRoutes = {
   tabs: undefined;
-  teams: undefined;
+  teams: { teams: TeamDTO[] };
 };
 
 export type AppNavigatorRoutesProps = NativeStackNavigationProp<AppRoutes>;

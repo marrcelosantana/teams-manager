@@ -1,19 +1,13 @@
 import { FlatList } from "react-native";
+import { PlayerDTO } from "@models/PlayerDTO";
 import { Container, Content, Header, HeaderTitle, Name } from "./styles";
 
 interface Props {
   teamName: string;
+  players: PlayerDTO[];
 }
 
-export function TeamCard({ teamName }: Props) {
-  const players = [
-    { id: "1", name: "Marcelo" },
-    { id: "2", name: "Yago" },
-    { id: "3", name: "Barbosa" },
-    { id: "4", name: "Jaime" },
-    { id: "5", name: "Davi" },
-  ];
-
+export function TeamCard({ teamName, players }: Props) {
   return (
     <Container>
       <Header>
