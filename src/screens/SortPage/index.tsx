@@ -89,7 +89,7 @@ export function SortPage() {
         setTeams(newTeams);
       }
 
-      navigator.navigate("teams", { teams: teams });
+      navigator.navigate("teams", { teams: newTeams });
       reset();
     } catch (error) {
       await toast.show({
