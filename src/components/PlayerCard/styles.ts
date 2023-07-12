@@ -9,7 +9,7 @@ export const Container = styled.View`
   background-color: ${({ theme }) => theme.COLORS.SHAPE};
   padding: 0 16px;
   margin-bottom: 12px;
-  border: 0.5px solid ${({ theme }) => theme.COLORS.LIGHT_PURPLE};
+  border: 0.5px solid ${({ theme }) => theme.COLORS.TEXT};
 `;
 
 export const Info = styled.View`

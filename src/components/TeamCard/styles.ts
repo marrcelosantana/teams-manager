@@ -20,9 +20,9 @@ export const Header = styled.View`
 `;
 
 export const HeaderTitle = styled.Text`
-  font-family: ${({ theme }) => theme.FONT_FAMILY.MEDIUM};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
   font-size: 14px;
-  color: ${({ theme }) => theme.COLORS.SHAPE};
+  color: #fff;
 `;
 
 export const Content = styled.View`
@@ -34,4 +34,5 @@ export const Name = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.MEDIUM};
   font-size: 14px;
   margin-bottom: 5px;
+  color: ${({ theme }) => theme.COLORS.TITLE};
 `;

@@ -19,7 +19,7 @@ export const Header = styled.View`
 export const HeaderTitle = styled.Text`
   font-size: 22px;
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
-  color: ${({ theme }) => theme.COLORS.SHAPE};
+  color: #fff;
 `;
 
 export const Content = styled.View`
@@ -42,7 +42,7 @@ export const Players = styled.View`
   padding: 14px;
   height: ${RFPercentage(32)}px;
   background-color: ${({ theme }) => theme.COLORS.SHAPE};
-  border: 1px solid ${({ theme }) => theme.COLORS.LIGHT_PURPLE};
+  border: 0.2px solid ${({ theme }) => theme.COLORS.TEXT};
 `;
 
 export const Actions = styled.View`
@@ -59,7 +59,7 @@ export const SortButton = styled(Button)`
 
 export const TextButton = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
-  color: ${({ theme }) => theme.COLORS.SHAPE};
+  color: #fff;
   font-size: ${RFValue(14)}px;
   margin-left: 4px;
 `;
@@ -70,11 +70,12 @@ export const MiniCard = styled.View`
   justify-content: center;
   padding: 0 20px;
   margin-bottom: 12px;
-  border: 0.3px solid ${({ theme }) => theme.COLORS.LIGHT_PURPLE};
+  border: 0.3px solid ${({ theme }) => theme.COLORS.TEXT};
 `;
 
 export const TextMiniCard = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
+  color: ${({ theme }) => theme.COLORS.TITLE};
   width: 100%;
   text-transform: capitalize;
 `;

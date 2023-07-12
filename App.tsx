@@ -3,6 +3,8 @@ import { NativeBaseProvider } from "native-base";
 import { ThemeProvider } from "styled-components";
 
 import { defaultTheme } from "@themes/default-theme";
+import { darkTheme } from "@themes/dark-theme";
+
 import { Loading } from "@components/Loading";
 import { Routes } from "@routes/index";
 

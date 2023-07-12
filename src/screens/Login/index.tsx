@@ -5,8 +5,8 @@ import AppleSvg from "../../assets/apple.svg";
 import GoogleSvg from "../../assets/google.svg";
 
 import { SoccerBall } from "phosphor-react-native";
+import { SocialButton } from "@components/SocialButton";
 
-import { SocialButton } from "@components/Social Button";
 import { useAuth } from "@hooks/useAuth";
 
 import {

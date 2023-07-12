@@ -89,8 +89,8 @@ export function SortPage() {
         setTeams(newTeams);
       }
 
-      reset();
       navigator.navigate("teams", { teams: teams });
+      reset();
     } catch (error) {
       await toast.show({
         title: "Não foi possível sortear os times!",
