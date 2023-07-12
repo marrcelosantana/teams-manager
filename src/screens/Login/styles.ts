@@ -17,21 +17,21 @@ export const TitleContainer = styled.View`
 export const SuperTitle = styled.Text`
   font-size: ${RFValue(22)}px;
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
-  color: ${({ theme }) => theme.COLORS.WHITE};
+  color: ${({ theme }) => theme.COLORS.SHAPE};
   text-align: center;
 `;
 
 export const Title = styled.Text`
   font-size: ${RFValue(18)}px;
   font-family: ${({ theme }) => theme.FONT_FAMILY.MEDIUM};
-  color: ${({ theme }) => theme.COLORS.WHITE};
+  color: ${({ theme }) => theme.COLORS.SHAPE};
   text-align: center;
   margin-top: 64px;
 `;
 
 export const Subtitle = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
-  color: ${({ theme }) => theme.COLORS.WHITE};
+  color: ${({ theme }) => theme.COLORS.SHAPE};
   font-size: 16px;
   text-align: center;
   margin-top: 80px;

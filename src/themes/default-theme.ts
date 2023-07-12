@@ -1,6 +1,6 @@
 export const defaultTheme = {
   COLORS: {
-    WHITE: "#FFFFFF",
+    SHAPE: "#FFFFFF",
     PURPLE: "#5636d3",
     ORANGE: "#FF872C",
     GREEN: "#12A454",

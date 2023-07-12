@@ -19,7 +19,7 @@ export const Header = styled.View`
 export const HeaderTitle = styled.Text`
   font-size: 22px;
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
-  color: ${({ theme }) => theme.COLORS.WHITE};
+  color: ${({ theme }) => theme.COLORS.SHAPE};
 `;
 
 export const Content = styled.View`
@@ -69,7 +69,7 @@ export const SignOutButton = styled(Button)`
 
 export const TextButton = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
-  color: ${({ theme }) => theme.COLORS.WHITE};
+  color: ${({ theme }) => theme.COLORS.SHAPE};
   font-size: ${RFValue(14)}px;
   margin-left: 4px;
 `;

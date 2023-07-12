@@ -17,14 +17,14 @@ export function Input({ errorMessage = null, isInvalid, ...rest }: Props) {
   return (
     <FormControl isInvalid={invalid}>
       <NativeBaseInput
-        bg={theme.COLORS.WHITE}
+        bg={theme.COLORS.SHAPE}
         height="48px"
         borderRadius={0}
         fontFamily={theme.FONT_FAMILY.REGULAR}
         fontSize={14}
         color={theme.COLORS.TEXT}
         _focus={{
-          bg: theme.COLORS.WHITE,
+          bg: theme.COLORS.SHAPE,
           borderColor: theme.COLORS.LIGHT_PURPLE,
         }}
         {...rest}

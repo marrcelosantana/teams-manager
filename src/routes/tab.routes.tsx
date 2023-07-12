@@ -31,7 +31,7 @@ export function TabRoutes() {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarActiveTintColor: theme.COLORS.PURPLE,
-        tabBarInactiveTintColor: theme.COLORS.WHITE,
+        tabBarInactiveTintColor: theme.COLORS.SHAPE,
         tabBarStyle: {
           backgroundColor: theme.COLORS.ORANGE,
           borderColor: theme.COLORS.TEXT,

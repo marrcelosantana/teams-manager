@@ -6,7 +6,7 @@ export const Button = styled.Pressable`
   height: ${RFValue(56)}px;
   flex-direction: row;
   align-items: center;
-  background-color: ${({ theme }) => theme.COLORS.WHITE};
+  background-color: ${({ theme }) => theme.COLORS.SHAPE};
   margin-bottom: 24px;
   border-radius: 5px;
 `;

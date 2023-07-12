@@ -19,7 +19,7 @@ export const Header = styled.View`
 export const HeaderTitle = styled.Text`
   font-size: 22px;
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
-  color: ${({ theme }) => theme.COLORS.WHITE};
+  color: ${({ theme }) => theme.COLORS.SHAPE};
 `;
 
 export const Content = styled.View`
@@ -41,7 +41,7 @@ export const Players = styled.View`
   margin-top: 20px;
   padding: 14px;
   height: ${RFPercentage(32)}px;
-  background-color: ${({ theme }) => theme.COLORS.WHITE};
+  background-color: ${({ theme }) => theme.COLORS.SHAPE};
   border: 1px solid ${({ theme }) => theme.COLORS.LIGHT_PURPLE};
 `;
 
@@ -59,7 +59,7 @@ export const SortButton = styled(Button)`
 
 export const TextButton = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
-  color: ${({ theme }) => theme.COLORS.WHITE};
+  color: ${({ theme }) => theme.COLORS.SHAPE};
   font-size: ${RFValue(14)}px;
   margin-left: 4px;
 `;

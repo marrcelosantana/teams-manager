@@ -1,7 +1,4 @@
 import { useState } from "react";
-
-import { useTheme } from "styled-components";
-
 import { useAuth } from "@hooks/useAuth";
 import { Loading } from "@components/Loading";
 
@@ -22,7 +19,6 @@ import {
 export function Profile() {
   const { user, signOut } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
-  const theme = useTheme();
 
   async function handleSignOut() {
     try {

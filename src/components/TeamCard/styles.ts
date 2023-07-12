@@ -22,7 +22,7 @@ export const Header = styled.View`
 export const HeaderTitle = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.MEDIUM};
   font-size: 14px;
-  color: ${({ theme }) => theme.COLORS.WHITE};
+  color: ${({ theme }) => theme.COLORS.SHAPE};
 `;
 
 export const Content = styled.View`

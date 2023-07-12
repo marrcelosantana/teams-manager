@@ -19,7 +19,7 @@ export const Header = styled.View`
 export const HeaderTitle = styled.Text`
   font-size: 22px;
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
-  color: ${({ theme }) => theme.COLORS.WHITE};
+  color: ${({ theme }) => theme.COLORS.SHAPE};
 `;
 
 export const BackButton = styled.Pressable``;
