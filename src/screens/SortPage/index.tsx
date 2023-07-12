@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FlatList } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
@@ -52,8 +51,6 @@ export function SortPage() {
     resolver: yupResolver(createMatchSchema),
   });
 
-  const [teams, setTeams] = useState<TeamDTO[]>([]);
-
   const navigator = useNavigation<AppNavigatorRoutesProps>();
   const toast = useToast();
 
@@ -86,7 +83,6 @@ export function SortPage() {
       for (let i = 0; i < teamsQuantity; i++) {
         const teamPlayers = shuffledPlayers.splice(0, playersPerTeam);
         newTeams.push({ id: i + 1, players: teamPlayers });
-        setTeams(newTeams);
       }
 
       navigator.navigate("teams", { teams: newTeams });
