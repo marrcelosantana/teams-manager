@@ -17,9 +17,10 @@ import { PlayerCard } from "@components/PlayerCard";
 import { Loading } from "@components/Loading";
 
 import { useMatch } from "@hooks/useMatch";
-import { PlayerDTO } from "src/models/PlayerDTO";
+import { useThemeContext } from "@hooks/useThemeContext";
 
-import { Plus, MoonStars, SoccerBall } from "phosphor-react-native";
+import { PlayerDTO } from "@models/PlayerDTO";
+import { Plus, MoonStars, SoccerBall, Sun } from "phosphor-react-native";
 
 import {
   AddButton,
@@ -45,6 +46,8 @@ const registerSchema = yup.object({
 
 export function Home() {
   const { players, fetchPlayers, registerPlayer } = useMatch();
+  const { isDarkTheme, changeTheme } = useThemeContext();
+
   const [isLoading, setIsLoading] = useState(false);
 
   const theme = useTheme();
@@ -94,6 +97,10 @@ export function Home() {
     }
   }
 
+  function handleChangeTheme() {
+    changeTheme();
+  }
+
   useFocusEffect(
     useCallback(() => {
       loadPlayers();
@@ -104,8 +111,12 @@ export function Home() {
     <Container>
       <Header>
         <UserInfo />
-        <Button onPress={() => {}}>
-          <MoonStars size={32} color={theme.COLORS.ORANGE} weight="bold" />
+        <Button onPress={handleChangeTheme}>
+          {!isDarkTheme ? (
+            <MoonStars size={32} color={theme.COLORS.ORANGE} weight="bold" />
+          ) : (
+            <Sun size={32} color={theme.COLORS.ORANGE} weight="bold" />
+          )}
         </Button>
       </Header>
 

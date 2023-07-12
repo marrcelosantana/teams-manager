@@ -14,7 +14,7 @@ export function UserInfo() {
 
   return (
     <Container>
-      <ProfileButton onPress={() => {}}>
+      <ProfileButton>
         <Avatar source={{ uri: user.picture }} resizeMode="cover" />
       </ProfileButton>
 
