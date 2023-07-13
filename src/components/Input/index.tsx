@@ -25,7 +25,7 @@ export function Input({ errorMessage = null, isInvalid, ...rest }: Props) {
         color={theme.COLORS.TEXT}
         _focus={{
           bg: theme.COLORS.SHAPE,
-          borderColor: theme.COLORS.LIGHT_PURPLE,
+          borderColor: theme.COLORS.ORANGE,
         }}
         {...rest}
       />
